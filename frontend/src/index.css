@@ -1,0 +1,59 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/montserrat";
+@import "tailwindcss";
+
+/*
+ * Tokens. Structure sampled from 1tv.ru's computed styles (Montserrat,
+ * #363742 header over #21222D page, fixed 120px, border-radius 0).
+ * Accent is the project's own brand orange, sampled from
+ * public/ceit-sc_2026.webp (dominant hue #fb6818).
+ *
+ * Contrast, measured:
+ *   ink #ffffff on surface        11.78:1  AA
+ *   ink-2 #a9abb8 on surface       5.17:1  AA
+ *   accent #ff8c47 on surface      5.10:1  AA  <- brand orange darkened for text;
+ *                                              raw #fb6818 is only 3.98:1 and fails AA
+ *   on-brand #21222d on #fb6818    5.33:1  AA  <- dark ink on the orange button,
+ *                                              because white on orange is only 2.96:1
+ */
+@theme {
+  /* Two faces, one job each: --font-sans drives UI (header, nav, body),
+     --font-display drives hero-scale type only. */
+  --font-sans: "Montserrat Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* colour — page, one raised surface, hairline, two inks, one brand + its text-safe tint */
+  --color-base: #21222d;
+  --color-surface: #363742;
+  --color-line: #45464f;
+  --color-ink: #ffffff;
+  --color-ink-2: #a9abb8;
+  --color-brand: #fb6818;
+  --color-accent: #ff8c47;
+  --color-on-brand: #21222d;
+
+  /* type — 12px uppercase nav is the lifted signature, so --text-xs is small on purpose */
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+
+  /* fluid display steps for the hero — the fixed scale above is what the
+     verified header is built against, so it is left alone */
+  --text-display: clamp(2.75rem, 1.6rem + 5vw, 3.5rem); /* 44px -> 72px */
+  --text-lede: clamp(1.0625rem, 1rem + 0.3vw, 1rem);
+
+  /* motion — --ease-* is a real Tailwind namespace, so it emits `ease-out`
+     directly. --duration-* is NOT: transition-duration lives on a fixed scale
+     (`duration-150` etc.), so a bare --duration-fast would emit the variable
+     and no utility, and `duration-fast` would silently resolve to nothing.
+     Hence `duration-(--duration-fast)` at the call sites — the v4 variable
+     shorthand, which wraps the token in var() and keeps the scale in CSS. */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 400ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

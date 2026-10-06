@@ -1,0 +1,49 @@
+# Vite dep-optimisation cache (lives at repo root here, not under frontend/)
+.vite/
+
+# Playwright MCP session artefacts — console logs, traces, screenshots
+.playwright-mcp/
+
+# Secrets. frontend/.gitignore covers *.local but NOT a bare .env, which is
+# exactly the file that holds a Supabase service-role key. Keep the examples.
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.local
+
+# TypeScript incremental build state. Currently written to
+# node_modules/.tmp/, so already covered by node_modules/ — listed
+# explicitly in case tsBuildInfoFile ever moves.
+*.tsbuildinfo
+
+# Test + coverage output (vitest --coverage, playwright)
+coverage/
+test-results/
+playwright-report/
+blob-report/
+
+# Deploy tooling local state
+.vercel/
+.turbo/
+.nx/
+
+# Local env / secrets beyond .env — direnv, and stray key files
+.direnv/
+.envrc
+*.pem
+*.key
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.sw?
